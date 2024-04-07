@@ -1,0 +1,41 @@
+fullness = []
+glasses = int(input("how many glasses"))
+small_glass = float(input("how many pints can Ali pour?"))
+for i in range(glasses):
+    fullness.append(0)
+overflowing = False
+
+
+while overflowing == False:
+    left = small_glass
+    for i in range(glasses):
+        if left > 0:
+            x = float(input("how much to pour into glass " + str(i+1)))
+            while x > left:
+                print("that is too much, please select a different value")
+                x = float(input("how much to pour into glass " + str(i+1)))
+            fullness[i] += x
+            left = left - x
+    if left > 0:
+        print("you have", left, "left")
+        y = int(input("which glass would you like to pour this in?"))
+        fullness[y-1] += left
+    for i in range(glasses):
+        print("Glass",i+1, ": ",fullness[i])
+
+    for i in range(glasses):
+        if fullness[i] > 1:
+            overflowing = True
+            break
+
+    print("")
+    print("Beth's turn")
+    empty = int(input("Pick a glass to empty, this glass and the glass before it shall be emptied"))
+    fullness[empty-1] = 0
+    fullness[empty-2] = 0
+    for i in range(glasses):
+        print("Glass",i+1, ": ",fullness[i])
+    print("")
+    print("Ali's turn")
+
+print("Ali wins")
